@@ -60,16 +60,16 @@ flags.DEFINE_integer(
 )
 
 flags.DEFINE_bool(
-    "do_train", True,
+    "do_train", False,
     "Whether to run training."
 )
 flags.DEFINE_bool("use_tpu", False, "Whether to use TPU or GPU/CPU.")
 
-flags.DEFINE_bool("do_eval", False, "Whether to run eval on the dev set.")
+flags.DEFINE_bool("do_eval", True, "Whether to run eval on the dev set.")
 
-flags.DEFINE_bool("do_predict", False,"Whether to run the model in inference mode on the test set.")
+flags.DEFINE_bool("do_predict", True,"Whether to run the model in inference mode on the test set.")
 
-flags.DEFINE_integer("train_batch_size", 32, "Total batch size for training.")
+flags.DEFINE_integer("train_batch_size", 8, "Total batch size for training.")
 
 flags.DEFINE_integer("eval_batch_size", 8, "Total batch size for eval.")
 
@@ -146,7 +146,7 @@ class DataProcessor(object):
     @classmethod
     def _read_data(cls, input_file):
         """Reads a BIO data."""
-        with open(input_file) as f:
+        with open(input_file,encoding='utf-8') as f:
             lines = []
             words = []
             labels = []
